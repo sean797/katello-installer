@@ -179,7 +179,7 @@ class capsule (
       server_foreman_url          => $foreman_url,
       server_foreman_ssl_cert     => $::certs::puppet::client_cert,
       server_foreman_ssl_key      => $::certs::puppet::client_key,
-      server_foreman_ssl_ca       => $::certs::puppet::client_ca_cert,
+      server_foreman_ssl_ca       => $::certs::puppet::ssl_ca_cert,
       server_storeconfigs_backend => false,
       server_dynamic_environments => true,
       server_environments_owner   => 'apache',
@@ -187,7 +187,7 @@ class capsule (
     }
   }
 
-  $foreman_proxy = $tftp or $dhcp or $dns or $puppet or $puppetca
+  $foreman_proxy = $tftp or $dhcp or $dns or $puppet or $puppetca or $realm
 
   if $foreman_proxy {
 
@@ -231,7 +231,7 @@ class capsule (
   }
 
   if $certs_tar {
-    certs::tar_extract { $capsule::certs_tar: }
+    certs::tar_extract { $capsule::certs_tar: } -> Class['certs']
 
     if $pulp {
       Certs::Tar_extract[$certs_tar] -> Class['certs::apache']
