@@ -3,7 +3,7 @@
 %global scl_ruby /usr/bin/ruby
 
 Name: katello-installer
-Version: 0.0.20
+Version: 0.0.21
 Release: 1%{?dist}
 Summary: Puppet-based installer for the Katello and Katello Capsule
 Group: Applications/System
@@ -66,6 +66,9 @@ ln -sf %{_datadir}/%{name}/bin/capsule-certs-generate %{buildroot}/%{_sbindir}/c
 %{_sbindir}/capsule-certs-generate
 
 %changelog
+* Thu Aug 07 2014 Ivan Nečas <inecas@redhat.com> 0.0.21-1
+- update submodules (inecas@redhat.com)
+
 * Mon Aug 04 2014 Ivan Nečas <inecas@redhat.com> 0.0.20-1
 - Set custom branch for updated repos (inecas@redhat.com)
 - Fixes #6875 - Ability to pass own server certs for apache and smart-proxy
